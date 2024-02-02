@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "EdgeClientLibraryTrial"
-  s.version      = "5.0.0"
+  s.version      = "5.1.0"
   s.summary      = "mimik edge client library trial"
 
   s.description  = <<-DESC
@@ -25,7 +25,6 @@ EdgeClientLibraryTrial is a collection of pods providing APIs to help developers
 
   s.dependency 'EdgeCore'
   s.dependency 'EdgeEngineTrial'
-  s.dependency 'EdgeUser'
 
   s.platform = 'ios', '15.0'
 end

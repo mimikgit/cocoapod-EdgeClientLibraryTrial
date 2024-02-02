@@ -26,7 +26,6 @@ By importing the EdgeClientLibrary cocoapod into your iOS project, you will be a
 
   - [EdgeCore](https://github.com/mimikgit/cocoapod-EdgeCore)
   - [EdgeEngineTrial](https://github.com/mimikgit/cocoapod-EdgeEngineTrial)
-  - [EdgeUser](https://github.com/mimikgit/cocoapod-EdgeUser)
 
 
 ## Supported Platforms, Targets
