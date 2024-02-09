@@ -1,4 +1,14 @@
-# Purpose of the mimik Client Library Trial
+# ``EdgeCore`` (Trial)
+
+mimik Client Library provides a programmatic way to work with the edgeEngine Runtime to access information about the mobile device on which the application is running.
+
+@Metadata {
+    @CallToAction(purpose: link, url: "https://github.com/mimikgit/cocoapod-EdgeCore")
+    @PageKind(article)
+    @PageColor(purple)
+}
+
+## Overview
 
 The purpose of the mimik Client Library is to provide a programmatic way to work with the edgeEngine Runtime to access information about the mobile device on which the application is running, as well as mobile devices running within a cluster of mobile devices that are hosting the edgeEngine Runtime. Also, to allow developers to use edge microservices running within a particular cluster.
 
@@ -8,41 +18,123 @@ Additionally, this component provides utility APIs that help developers with cor
 
 Furthermore, the mimik Client Library Engine component provides additional edgeEngine Runtime utility APIs, as well as vendoring the actual edgeEngine Runtime binary into the iOS project.
 
+## Documentation
 
-# Purpose of the Core and Engine components of the mimik Client Library Trial
+The full mimik client library EdgeClient documentation can be accessed from [GitHub Pages](https://mimikgit.github.io/cocoapod-EdgeCore/documentation/edgecore) or the Xcode docc archive file can be downloaded as a [zip](https://github.com/mimikgit/cocoapod-EdgeCore/tree/main/EdgeCore.doccarchive.zip) and opened locally in Xcode.
 
-The edgeEngine Runtime is a compiled binary that's intended to run on actual devices.
+The EdgeEngineClient platform protocol part of the documentation can be access from [GitHub Pages](https://mimikgit.github.io/cocoapod-EdgeCore/documentation/edgecore/edgeengineclient) 
 
-The reason for having the mimik Client Library split into its [Core](https://github.com/mimikgit/cocoapod-EdgeCore) and [Engine](https://github.com/mimikgit/cocoapod-EdgeEngine) components is to give developers the choice of having the edgeEngine Runtime bundled in within the iOS application or to have it running on a host platform of their own choosing (ie. macOS, Linux, Windows, etc.)
+## EdgeClient
 
-Normally, when the developers intend to run their iOS application on iOS devices, the mimik Client Library Engine can be used to facilitate the integration of the edgeEngine Runtime binary directly within the iOS application bundle.
+### Authentication
 
-However, in order for developers to be able to run their iOS application in an [iOS Simulator](https://developer.apple.com/documentation/xcode/running-your-app-in-simulator-or-on-a-device) or through a [Mac Catalyst](https://developer.apple.com/mac-catalyst/) translation layer, it is necessary for the edgeEngine Runtime to be running on a host platform outside of the iOS application.
+- ``EdgeClient/authorizeDeveloper(developerIdToken:edgeEngineIdToken:)``
+- ``EdgeClient/authorizeUser(email:password:edgeEngineIdToken:service:)``
+- ``EdgeClient/authorizeUser(phoneNumber:edgeEngineIdToken:service:)``
+- ``EdgeClient/validateUser(codes:edgeEngineIdToken:service:)``
+- ``EdgeClient/signup(email:password:edgeEngineIdToken:service:)``
+- ``EdgeClient/validateSignup(codes:password:edgeEngineIdToken:service:)``
+- ``EdgeClient/authorizeBackendUse(authorization:service:)``
+- ``EdgeClient/authorizeBackendUse(federatedToken:policyId:edgeEngineIdToken:service:)``
 
+### Account Management
 
-# mimik Client Library Trial Content
+- ``EdgeClient/accountInformation(service:authorization:)``
+- ``EdgeClient/passwordReset(email:edgeEngineIdToken:service:)``
+- ``EdgeClient/validatePasswordReset(codes:newPassword:edgeEngineIdToken:service:)``
+- ``EdgeClient/passwordChange(email:currentPassword:newPassword:edgeEngineIdToken:service:)``
+- ``EdgeClient/deleteAccount(email:password:edgeEngineIdToken:service:)``
+- ``EdgeClient/validateDeleteAccount(codes:password:edgeEngineIdToken:service:)``
+- ``EdgeClient/executeDeleteAccount(authorization:service:)``
 
-By importing the EdgeClientLibrary cocoapod into your iOS project, you will be automatically importing the following cocoapods as its dependencies:
+### Environment
 
-  - [EdgeCore](https://github.com/mimikgit/cocoapod-EdgeCore)
-  - [EdgeEngineTrial](https://github.com/mimikgit/cocoapod-EdgeEngineTrial)
+- ``EdgeClient/edgeEngineIdToken()``
+- ``EdgeClient/edgeEngineInfo()``
+- ``EdgeClient/externalEdgeEngineIsRunning()``
+- ``EdgeClient/externalEdgeEngineActivated()``
+- ``EdgeClient/edgeEngineUrlComponents()``
+- ``EdgeClient/edgeEngineUrlString()``
+- ``EdgeClient/authenticationScopes(serverUrl:)``
+- ``EdgeClient/healthCheck(service:requireMatch:)``
 
+### Managing edge microservices
+
+- ``EdgeClient/deployMicroservice(edgeEngineAccessToken:config:imageTarPath:)``
+- ``EdgeClient/deployedMicroservices(edgeEngineAccessToken:)``
+- ``EdgeClient/deployedMicroservice(imageId:containerId:edgeEngineAccessToken:)``
+- ``EdgeClient/deployedMicroserviceImages(edgeEngineAccessToken:)``
+- ``EdgeClient/deployedMicroserviceImage(imageId:edgeEngineAccessToken:)``
+- ``EdgeClient/deployedMicroserviceContainers(edgeEngineAccessToken:)``
+- ``EdgeClient/deployedMicroserviceContainer(containerId:edgeEngineAccessToken:)``
+- ``EdgeClient/updateMicroservice(edgeEngineAccessToken:microservice:imageTarPath:envVariables:)``
+- ``EdgeClient/updateMicroserviceConfig(edgeEngineAccessToken:microservice:envVariables:)``
+- ``EdgeClient/undeployMicroservice(edgeEngineAccessToken:microservice:)``
+- ``EdgeClient/undeployMicroserviceComponent(edgeEngineAccessToken:component:identifier:)``
+
+### Misc Utilities
+
+- ``EdgeClient/downloadContent(sourceUrl:destinationFileUrl:progressHandler:)``
+- ``EdgeClient/downloadImageContent(sourceUrl:)``
+- ``EdgeClient/exportVideo(session:outputURL:outFileType:)``
+- ``EdgeClient/uploadContent(sourceFileUrl:destinationUrl:mimeType:progressHandler:)``
+- ``EdgeClient/healthCheck(service:requireMatch:)``
+
+## Class Methods
+
+- ``EdgeClient/activateExternalEdgeEngine(host:port:)``
+- ``EdgeClient/applicationBackend()``
+- ``EdgeClient/callBackend(config:)``
+- ``EdgeClient/callBackend(config:type:)``
+- ``EdgeClient/deactivateExternalEdgeEngine()``
+- ``EdgeClient/defaultBackend()``
+- ``EdgeClient/edgeEngineWorkingDirectory()``
+- ``EdgeClient/externalEdgeEngineActivated()``
+- ``EdgeClient/fileExtensionFor(type:)``
+- ``EdgeClient/fileExtentionFor(mimeType:)``
+- ``EdgeClient/forceDefaultBackendSelection()``
+- ``EdgeClient/manuallySelectedBackend()``
+- ``EdgeClient/mimeTypeFor(type:)``
+- ``EdgeClient/mimeTypeFor(fileExtension:)``
+- ``EdgeClient/responseData(response:)``
+- ``EdgeClient/responseError(response:)``
+- ``EdgeClient/responseJSON(response:jsonDataKey:)``
+- ``EdgeClient/responsePagingInfo(response:pagingHandler:)``
+- ``EdgeClient/selectedBackend()``
+- ``EdgeClient/selectBackend(backend:)``
+- ``EdgeClient/setLoggingLevel(level:subsystem:)``
+- ``EdgeClient/uttypeFor(mimeType:)``
+- ``EdgeClient/uttypeFor(fileExtension:)``
+- ``EdgeClient/workingDirectory(searchPathDirectory:subFolder:filename:)``
+
+## EdgeEngineClient Platform Protocol
+
+### Controlling the edgeEngine Runtime
+
+- ``EdgeEngineClient/startEdgeEngine(parameters:)``
+- ``EdgeEngineClient/stopEdgeEngine()``
+- ``EdgeEngineClient/restartEdgeEngine()``
+- ``EdgeEngineClient/resetEdgeEngine()``
+- ``EdgeEngineClient/edgeEngineIsRunning()``
+- ``EdgeEngineClient/edgeEngineRuntimeIsManaged()``
+- ``EdgeEngineClient/edgeEngineParameters()``
+- ``EdgeEngineClient/manageEdgeEngineRuntime(enable:)``
+- ``EdgeEngineClient/expectedEdgeEngineVersion()``
+- ``EdgeEngineClient/setCustomPort(number:)``
+
+For adding edgeEngine framework to your project please see: [EdgeEngine](https://github.com/mimikgit/cocoapod-EdgeEngine)
 
 ## Supported Platforms, Targets
-
 * `iOS Devices running iOS 15+`
+* `iOS Simulators running iOS 15+`
+* `iOS Mac Catalyst running macOS 12.0`
 
-
-## iOS Simulator support
-
-For more information about iOS Simulator support see this [article](https://devdocs.mimik.com/tutorials/12-index#workingwithaniossimulator)
-
+For more information about working with an iOS Simulator [go here](https://devdocs.mimik.com/tutorials/12-index#workingwithaniossimulator)
 
 ## Requirements
 ```
 iOS 15.0+
 ```
-
 
 ## Installation
 
@@ -58,7 +150,8 @@ use_frameworks!
 inhibit_all_warnings!
 
 def mimik
-  pod 'EdgeClientLibraryTrial'
+  pod 'EdgeCore'
+  pod 'EdgeEngine'
 end
 
 target '{target}' do
@@ -78,17 +171,31 @@ end
 ```
 
 
-# More Information
+## Tutorial
 
-* [Integrating](https://devdocs.mimik.com/tutorials/11-index) mimik Client Library into an iOS project
-* Working with [edgeEngine](https://devdocs.mimik.com/tutorials/12-index) in an iOS project
-* Working with [edge microservices](https://devdocs.mimik.com/tutorials/13-index) in an iOS project
+Visit this [tutorial](https://devdocs.mimik.com/tutorials/11-index) to learn more about the mimik client library and how to integrate it into your iOS project.
 
+## Community
 
-# Key Concepts
+Don't forget to checkout all mimik client libraries at [mimik GitHub](https://github.com/mimikgit/).
+You can also read about other mimik activies
 
-In order to get the full benefit of this document, the intended readers should be familiar with the following:
+Umbrella cocoapods:
 
-* Understanding the Fundamentals of the [edgeEngine Runtime](https://devdocs.mimik.com/key-concepts/01-index)
-* Understanding [edgeEngine Images and Containers](https://devdocs.mimik.com/key-concepts/02-index)
-* The basics of using an [edgeEngine Tokens](https://devdocs.mimik.com/key-concepts/03-index) to access and work with the edgeEngine Runtime
+ * [EdgeClientLibrary (Core + Engine)](https://github.com/mimikgit/cocoapod-EdgeClientLibrary)
+ * [EdgeClientLibraryTrial (Core + EngineTrial)](https://github.com/mimikgit/cocoapod-EdgeClientLibraryTrial)
+ 
+Individual cocoapods:
+ 
+ * [EdgeCore](https://github.com/mimikgit/cocoapod-EdgeCore)
+ * [EdgeEngine](https://github.com/mimikgit/cocoapod-EdgeEngine)
+ * [EdgeEngineTrial](https://github.com/mimikgit/cocoapod-EdgeEngineTrial)
+ * [EdgeUser](https://github.com/mimikgit/cocoapod-EdgeUser)
+
+## Author
+
+[mimik Technology Inc.](https://github.com/mimikgit/)
+
+## License
+
+The aforementioned mimik client libraries are available under the MIT license. See the LICENSE file for more information.
