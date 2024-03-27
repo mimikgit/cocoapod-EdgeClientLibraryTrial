@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "EdgeClientLibraryTrial"
-  s.version      = "5.3.1"
+  s.version      = "5.3.2"
   s.summary      = "mimik edge client library trial"
 
   s.description  = <<-DESC
@@ -23,7 +23,7 @@ EdgeClientLibraryTrial is a collection of pods providing APIs to help developers
   s.source       = { :git => "https://github.com/mimikgit/cocoapod-EdgeClientLibraryTrial.git", :tag => "#{s.version}" }
   s.swift_versions = '5.0'
 
-  s.dependency 'EdgeCore', '~> 5.3.1'
+  s.dependency 'EdgeCore', '~> 5.3.2'
   s.dependency 'EdgeEngineTrial', '~> 5.3.1'
 
   s.platform = 'ios', '15.0'
